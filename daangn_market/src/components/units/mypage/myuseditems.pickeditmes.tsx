@@ -67,7 +67,7 @@ export default function PickedItems(props) {
                   color="text.secondary"
                   gutterBottom
                 >
-                  판매일자 : {getMyDate(el.soldAt)}
+                  판매일자 : {getMyDate(el.createdAt)}
                 </Typography>
                 <p style={{ color: "gray" }}>
                   거래위치 :

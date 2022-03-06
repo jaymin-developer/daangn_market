@@ -13,9 +13,10 @@ export default function LayoutHeaderUI(props: IHeaderProps) {
           <HStyle.SearchBarBox>
             <HStyle.SearchBar
               type="search"
-              placeholder="동네 이름, 물품명 등을 검색해보세요!"
+              placeholder="물품명을 검색해보세요!"
+              onChange={props.onChangeKeyword}
             />
-            <img src="/images/search-icon.svg" />
+            <img src="/images/search-icon.svg" onClick={props.onClickSearch} />
           </HStyle.SearchBarBox>
         </HStyle.HeaderLeft>
         <HStyle.HeaderCenter>

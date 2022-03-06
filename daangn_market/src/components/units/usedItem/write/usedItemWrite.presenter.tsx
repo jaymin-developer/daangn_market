@@ -3,18 +3,13 @@ import Input01 from "../../../commons/inputs/01/inputs01"
 import dynamic from "next/dynamic"
 import "react-quill/dist/quill.snow.css"
 import Input02 from "../../../commons/inputs/02/inputs02"
+import UploadButtons from "../../../commons/imageUpload"
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false })
 
 export default function UsedItemWriteUI(props) {
   return (
     <S.Wrapper>
-      <S.ImageUpload>
-        {/* <UploadButtons
-          onChangeFile={props.onChangeFile}
-          images={props.images}
-        /> */}
-      </S.ImageUpload>
       <S.Form
         onSubmit={
           props.isEdit
@@ -34,6 +29,12 @@ export default function UsedItemWriteUI(props) {
           </S.SubmitButton>
         </S.WrapperHead>
         <S.WrapperBody>
+          <S.ImageUpload>
+            <UploadButtons
+              onChangeFile={props.onChangeFile}
+              images={props.images}
+            />
+          </S.ImageUpload>
           <S.WrapperBodyHead>
             <S.ItemName>
               <Input01
@@ -78,6 +79,9 @@ export default function UsedItemWriteUI(props) {
                 }
               />
             </S.Contents>
+            <div style={{ color: "red", fontSize: "14px" }}>
+              {props.formState.errors.contents?.message}
+            </div>
             <div style={{ display: "flex" }}>
               {props.tags.map((el, index) => (
                 <div
@@ -105,10 +109,6 @@ export default function UsedItemWriteUI(props) {
                   </button>
                 </div>
               ))}
-
-              <div style={{ color: "red", fontSize: "14px" }}>
-                {props.formState.errors.contents?.message}
-              </div>
             </div>
           </S.WrapperBodyBody>
         </S.WrapperBody>

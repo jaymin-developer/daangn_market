@@ -18,6 +18,7 @@ export const FETCH_USED_ITEM = gql`
         lng
       }
       seller {
+        _id
         name
       }
     }
@@ -53,6 +54,16 @@ export const CREATE_POINT_TRANSACTION_OF_BUYING_AND_SELLING = gql`
       name
       remarks
       price
+    }
+  }
+`
+
+export const FETCH_USER_LOGGED_IN = gql`
+  query fetchUserLoggedIn {
+    fetchUserLoggedIn {
+      _id
+      email
+      name
     }
   }
 `

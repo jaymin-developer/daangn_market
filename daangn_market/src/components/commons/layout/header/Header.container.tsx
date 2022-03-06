@@ -1,6 +1,6 @@
 import { useMutation, gql, useQuery } from "@apollo/client"
 import { useRouter } from "next/router"
-import { useContext, useEffect } from "react"
+import { ChangeEvent, useContext, useEffect, useState } from "react"
 import { GlobalContext } from "../../../../../pages/_app"
 import { IQuery } from "../../../../commons/types/generated/types"
 import LayoutHeaderUI from "./Header.presenter"
@@ -21,11 +21,21 @@ export const LOGOUT_USER = gql`
 `
 
 export default function LayoutHeader() {
-  const { accessToken, setUserInfo } = useContext(GlobalContext)
+  const { accessToken, setUserInfo, setSearch } = useContext(GlobalContext)
   const router = useRouter()
+  const [keyword, setKeyword] = useState("")
   const { data } =
     useQuery<Pick<IQuery, "fetchUserLoggedIn">>(FETCH_USER_LOGGED_IN)
   const [logoutUser] = useMutation(LOGOUT_USER)
+
+  function onChangeKeyword(event: ChangeEvent<HTMLInputElement>) {
+    setKeyword(event.target.value)
+  }
+
+  function onClickSearch() {
+    setSearch(keyword)
+    router.push("/useditems")
+  }
 
   function onClickLogin() {
     router.push("/login")
@@ -62,6 +72,8 @@ export default function LayoutHeader() {
     <LayoutHeaderUI
       data={data}
       accessToken={accessToken}
+      onChangeKeyword={onChangeKeyword}
+      onClickSearch={onClickSearch}
       onClickLogOut={onClickLogOut}
       onClickLogin={onClickLogin}
       onClickSignup={onClickSignup}

@@ -1,16 +1,17 @@
 import { useQuery } from "@apollo/client"
 import { useRouter } from "next/router"
-import { useState, MouseEvent } from "react"
+import { useState, MouseEvent, useContext, useEffect } from "react"
+import { GlobalContext } from "../../../../../pages/_app"
 import { TodayDate } from "../../../../commons/libraries/utils"
 import UsedItemListUI from "./usedItemList.presenter"
 import { FETCH_USED_ITEMS } from "./usedItemList.queries"
 
 export default function UsedItemList() {
+  const { search } = useContext(GlobalContext)
   const router = useRouter()
   const [region, setRegion] = useState("")
-
   const { data, refetch, fetchMore } = useQuery(FETCH_USED_ITEMS, {
-    variables: { page: 1 },
+    variables: { page: 1, search: search || "" },
   })
 
   const onLoadMore = () => {
@@ -32,6 +33,10 @@ export default function UsedItemList() {
     })
   }
 
+  useEffect(() => {
+    refetch({ search: search, page: 1 })
+  }, [])
+
   const onChangeRegion = (event) => {
     setRegion(event.target.value)
   }
@@ -49,11 +54,11 @@ export default function UsedItemList() {
   function onClickMoveToUsedItemNew() {
     router.push("/useditems/new")
   }
+
   return (
     <UsedItemListUI
       region={region}
       data={data}
-      refetch={refetch}
       onLoadMore={onLoadMore}
       onChangeRegion={onChangeRegion}
       onClickMoveToUsedItemDetail={onClickMoveToUsedItemDetail}

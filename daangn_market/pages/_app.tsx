@@ -27,6 +27,9 @@ interface IGlobalContext {
   setAccessToken?: Dispatch<SetStateAction<string>>
   userInfo?: object
   setUserInfo?: Dispatch<SetStateAction<string | object>>
+  getDebounce?: string
+  search: string
+  setSearch: Dispatch<SetStateAction<string>>
 }
 
 export const GlobalContext = createContext<IGlobalContext>({})
@@ -34,12 +37,15 @@ export const GlobalContext = createContext<IGlobalContext>({})
 function MyApp({ Component, pageProps }: AppProps) {
   const [accessToken, setAccessToken] = useState("")
   const [userInfo, setUserInfo] = useState({})
+  const [search, setSearch] = useState("")
 
   const value = {
     accessToken,
     setAccessToken,
     userInfo,
     setUserInfo,
+    search,
+    setSearch,
   }
 
   useEffect(() => {
@@ -47,7 +53,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       setAccessToken(newAccessToken)
     })
   }, [])
-  console.log(accessToken)
   const errorLink = onError(({ graphQLErrors, operation, forward }) => {
     if (graphQLErrors) {
       for (const err of graphQLErrors) {

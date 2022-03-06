@@ -6,6 +6,7 @@ import {
   DELETE_USED_ITEM,
   FETCH_USED_ITEM,
   FETCH_USED_ITEMS_PICKED,
+  FETCH_USER_LOGGED_IN,
   TOGGLE_USED_ITEM_PICK,
 } from "./usedItemDetail.queries"
 import UsedItemDetailUI from "./usedItemDetail.presenter"
@@ -14,7 +15,7 @@ import { useEffect, useState } from "react"
 export default function UsedItemDetail() {
   const router = useRouter()
   const [pick, setPick] = useState(false)
-  // const { data } = useQuery(FETCH_USER_LOGGED_IN)
+  const { data: userData } = useQuery(FETCH_USER_LOGGED_IN)
 
   const [deleteUseditem] = useMutation(DELETE_USED_ITEM)
   const [toggleUseditemPick] = useMutation(TOGGLE_USED_ITEM_PICK)
@@ -106,6 +107,7 @@ export default function UsedItemDetail() {
       </Head>
       <UsedItemDetailUI
         pick={pick}
+        userData={userData}
         itemData={itemData}
         onClickDelete={onClickDelete}
         onClickPayment={onClickPayment}

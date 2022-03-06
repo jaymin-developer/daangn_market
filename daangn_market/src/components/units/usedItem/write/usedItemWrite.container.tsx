@@ -16,7 +16,7 @@ const schema = yup.object().shape({
   name: yup
     .string()
     .max(20, "최대 20자까지 작성 가능합니다.")
-    .required("도서명은 필수 입력 사항입니다."),
+    .required("상품명은 필수 입력 사항입니다."),
   price: yup.string().required("판매 가격은 필수 입력 사항입니다."),
   remarks: yup
     .string()
@@ -45,10 +45,6 @@ export default function UsedItemWrite(props) {
   const [address, setAddress] = useState("")
   const [tags, setTags] = useState<string[]>([])
   const [tag, setTag] = useState("")
-  const [lat, setLat] = useState(0)
-  const [lng, setLng] = useState(0)
-
-  // const fileRef = useRef<HTMLInputElement>(null)
 
   const { register, handleSubmit, formState, setValue, trigger, getValues } =
     useForm({
@@ -63,6 +59,21 @@ export default function UsedItemWrite(props) {
     setValue("contents", props.data?.fetchUseditem.contents)
     setValue("price", props.data?.fetchUseditem.price)
     setValue("images", props.data?.fetchUseditem.images)
+  }, [props.data])
+  console.log(props.data)
+  useEffect(() => {
+    if (props.data?.fetchUseditem.tags?.length) {
+      setTags([...props.data?.fetchUseditem.tags])
+      console.log(tags)
+    }
+  }, [props.data])
+
+  // 이미지 수정
+  useEffect(() => {
+    if (props.data?.fetchUseditem.images?.length) {
+      setImages([...props.data?.fetchUseditem.images])
+      console.log(images)
+    }
   }, [props.data])
 
   const handleChange = (value: string) => {
@@ -82,10 +93,6 @@ export default function UsedItemWrite(props) {
       if (error instanceof Error) alert(error.message)
     }
   }
-  console.log(tag)
-  // const onClickUploadFile = () => {
-  //   fileRef.current?.click();
-  // };
   const onChangeTag = (event: ChangeEvent<HTMLInputElement>) => {
     setTag(event.target.value)
   }
@@ -122,12 +129,7 @@ export default function UsedItemWrite(props) {
         tags: tags,
         useditemAddress: {
           address,
-          lat,
-          lng,
         },
-        // addressDetail :
-        // },
-        // tags: tags,
       },
     }
 
@@ -136,7 +138,7 @@ export default function UsedItemWrite(props) {
         variables: writeVariables,
       })
       alert("제품 등록 성공!")
-      router.push(`/usedItems/${result.data.createUseditem._id}`)
+      router.push(`/useditems/${result.data.createUseditem._id}`)
     } catch (error) {
       if (error instanceof Error) alert(error.message)
     }
@@ -157,15 +159,17 @@ export default function UsedItemWrite(props) {
             contents: data.contents,
             price: Number(data.price),
             images: images,
+            tags: tags,
           },
         },
       })
       Modal.success({ content: "수정이 완료되었습니다." })
-      router.push(`/usedItems/${router.query.id}`)
+      router.push(`/useditems/${router.query.id}`)
     } catch (error) {
       Modal.error({ content: error.message })
     }
   }
+
   return (
     <UsedItemWriteUI
       isEdit={props.isEdit}
@@ -186,10 +190,6 @@ export default function UsedItemWrite(props) {
       onKeyUpTags={onKeyUpTags}
       onClickDeleteTag={onClickDeleteTag}
       setAddress={setAddress}
-      setLat={setLat}
-      setLng={setLng}
-      lat={lat}
-      lng={lng}
     />
   )
 }

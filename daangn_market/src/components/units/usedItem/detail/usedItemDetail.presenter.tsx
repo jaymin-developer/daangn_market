@@ -14,7 +14,7 @@ declare const window: typeof globalThis & {
 }
 
 export default function UsedItemDetailUI(props) {
-  const location = "usedItems"
+  const location = "useditems"
 
   const settings = {
     dots: true,
@@ -36,7 +36,7 @@ export default function UsedItemDetailUI(props) {
         const mapContainer = document.getElementById("map") // 지도를 표시할 div
         const mapOption = {
           center: new window.kakao.maps.LatLng(
-            props.itemData?.fetchUseditem?.useditemAddress?.lat,
+            props.itemData.fetchUseditem?.useditemAddress?.lat,
             props.itemData?.fetchUseditem?.useditemAddress?.lng
           ), // 지도의 중심좌표
           level: 3, // 지도의 확대 레벨
@@ -86,8 +86,15 @@ export default function UsedItemDetailUI(props) {
                 : "위치 정보 없음"}
             </S.Location>
           </S.WriterCreatedAt>
-
-          <BasicMenu location={location} onClickDelete={props.onClickDelete} />
+          {props.userData?.fetchUserLoggedIn?._id ===
+          props.itemData?.fetchUseditem?.seller?._id ? (
+            <BasicMenu
+              location={location}
+              onClickDelete={props.onClickDelete}
+            />
+          ) : (
+            <div style={{ width: "10%" }}></div>
+          )}
         </S.WriterBox>
         <div style={{ display: "flex" }}>
           {props.itemData?.fetchUseditem?.tags?.map((el, index) => (

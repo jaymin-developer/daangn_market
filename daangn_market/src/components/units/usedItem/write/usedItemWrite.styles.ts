@@ -4,7 +4,7 @@ import styled from "@emotion/styled"
 // const ReactQuill = dynamic(() => import("react-quill"), { ssr: false })
 
 export const Wrapper = styled.div`
-  max-width: 1000px;
+  width: 1000px;
   box-sizing: border-box;
   margin: 100px auto 30px auto;
   display: flex;
@@ -54,7 +54,7 @@ export const SubmitButton = styled.button`
 `
 
 export const WrapperBody = styled.div`
-  padding: 40px 20px 10px;
+  padding: 10px 20px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -132,10 +132,14 @@ export const LocationRight = styled.div`
 
 export const WrapperFoot = styled.div`
   width: 100%;
+  padding: 0 20px 10px;
 `
 
 export const ImageUpload = styled.div`
   width: 100%;
-  padding: 20px 30px;
-  border-bottom: 1px solid #d4d4d4;
+  padding: 0px 0px 20px;
 `
+export const AddressBox = styled.div``
+export const AddressInputBox = styled.div``
+export const MapBox = styled.div``
+export const AddressButton = styled.button``

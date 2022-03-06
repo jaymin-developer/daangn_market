@@ -73,7 +73,7 @@ export default function BasicMenu(props) {
         }}
       >
         <MenuItem onClick={onClickMoveToEdit}>수정하기</MenuItem>
-        {router.pathname.includes("usedItems") ? (
+        {router.pathname.includes("useditems") ? (
           <MenuItem onClick={props.onClickDelete}>삭제하기</MenuItem>
         ) : (
           <MenuItem onClick={onClickDeleteBoard}>삭제하기</MenuItem>
