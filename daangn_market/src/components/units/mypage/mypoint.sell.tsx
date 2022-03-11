@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { getMyDate } from "../../../commons/libraries/utils"
 import {
   FETCH_USED_ITEMS_I_SOLD,
@@ -20,7 +20,11 @@ export default function SellHistory() {
     variables: { page: 1 },
   })
   const { data: countData } = useQuery(FETCH_USED_ITMES_COUNT_I_SOLD)
-  console.log(countData)
+
+  useEffect(() => {
+    router.push("/mypage/?soldList", undefined, { shallow: true })
+  }, [])
+
   const onClickSelling = () => {
     setSelling(true)
     setSold(false)

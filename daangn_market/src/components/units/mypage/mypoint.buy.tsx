@@ -5,9 +5,14 @@ import * as S from "./mypage.styles"
 import InfiniteScroll from "react-infinite-scroller"
 import { CardContent, Typography } from "@mui/material"
 import { useRouter } from "next/router"
+import { useEffect } from "react"
 
 export default function BuyHistory() {
   const router = useRouter()
+
+  useEffect(() => {
+    router.push("/mypage/?buyList", undefined, { shallow: true })
+  }, [])
 
   const { data, fetchMore } = useQuery(FETCH_POINT_TRANSACTION_OF_BUYING, {
     variables: { page: 1 },

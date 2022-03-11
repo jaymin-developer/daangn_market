@@ -1,5 +1,6 @@
 import styled from "@emotion/styled"
-import { useState } from "react"
+import { useRouter } from "next/router"
+import { useEffect, useState } from "react"
 import AllHistory from "./mypoint.all"
 import ChargeHistory from "./mypoint.charge"
 
@@ -17,8 +18,13 @@ const WrapperRightBody = styled.div`
 `
 
 export default function MyPointPage() {
+  const router = useRouter()
   const [allHistory, setAllHistory] = useState(true)
   const [chargeHistory, setChargeHistory] = useState(false)
+
+  useEffect(() => {
+    router.push("/mypage/?myPoint", undefined, { shallow: true })
+  }, [])
 
   const onClickAll = () => {
     setAllHistory(true)

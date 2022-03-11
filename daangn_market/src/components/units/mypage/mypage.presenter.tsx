@@ -15,6 +15,7 @@ import SellHistory from "./mypoint.sell"
 import BuyHistory from "./mypoint.buy"
 import PickedItems from "./myuseditems.pickeditmes"
 import MyPointPage from "./mypoint"
+import MyProfilePage from "./myprofile"
 
 export default function MyPageUI(props) {
   return (
@@ -59,7 +60,7 @@ export default function MyPageUI(props) {
           <S.ProfileBox>
             <div style={{ display: "flex" }}>
               <img
-                src="/images/Profile.png"
+                src={`https://storage.googleapis.com/${props.data?.fetchUserLoggedIn.picture}`}
                 width="80px"
                 style={{ cursor: "pointer", marginRight: "20px" }}
               />
@@ -108,6 +109,7 @@ export default function MyPageUI(props) {
           {props.buyItems && <BuyHistory />}
           {props.pickUsedItem && <PickedItems />}
           {props.pickMyPoint && <MyPointPage />}
+          {props.pickMyProfile && <MyProfilePage />}
         </S.WrapperRight>
       </S.Wrapper>
     </>
