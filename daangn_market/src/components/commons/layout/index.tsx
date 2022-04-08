@@ -24,23 +24,8 @@ const BodyWrapper = styled.div`
 
 export default function Layout(props: IProps) {
   const router = useRouter()
-  const HIDDEN = [
-    //   "/login",
-    //   "/signup",
-    //   "/boards/new",
-    "/useditems",
-    //   `/boards/${router.query.id}/edit`,
-    //   `/usedItems/${router.query.id}/edit`,
-  ]
-  // const HIDDEN_BANNER = [
-  //   `/boards/${router.query.id}`,
-
-  //   `/usedItems/${router.query.id}`,
-  // ]
-  // const HIDDEN_ALL = ["/landing", "/"]
+  const HIDDEN = ["/useditems"]
   const isHidden = HIDDEN.includes(router.asPath)
-  // const isAllHidden = HIDDEN_ALL.includes(router.asPath)
-  // const isBannerHidden = HIDDEN_BANNER.includes(router.asPath)
 
   return (
     <Wrapper>

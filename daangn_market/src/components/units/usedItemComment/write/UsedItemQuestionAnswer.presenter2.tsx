@@ -1,10 +1,6 @@
-import { useMutation, useQuery } from "@apollo/client"
+import { useMutation } from "@apollo/client"
 import styled from "@emotion/styled"
 import { ChangeEvent, useState } from "react"
-import {
-  IQuery,
-  IQueryFetchUseditemQuestionAnswersArgs,
-} from "../../../../commons/types/generated/types"
 import { FETCH_USED_ITEM_QUESTIONS_ANSWERS } from "../list/BoardCommentList.queries"
 import {
   CREATE_USED_ITEM_QUESTION_ANSWER,

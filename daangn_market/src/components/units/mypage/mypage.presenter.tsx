@@ -1,7 +1,4 @@
 import * as S from "./mypage.styles"
-// import MyUsedItemsPage from "./myuseditems"
-// import MyProfilePage from "./myprofile"
-// import MyPointPage from "./mypoint"
 import {
   FaReceipt,
   FaHeart,

@@ -4,6 +4,7 @@ export interface IUploads01Props {
   index: number
   images: any
   files: any
+  el: any
   defaultFileUrl?: string
   onChangeFile: (fileUrl: string, index: number) => void
 }

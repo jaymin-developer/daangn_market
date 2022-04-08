@@ -1,4 +1,3 @@
-import * as React from "react"
 import Button from "@mui/material/Button"
 import Menu from "@mui/material/Menu"
 import MenuItem from "@mui/material/MenuItem"
@@ -6,12 +5,11 @@ import styled from "@emotion/styled"
 import { useRouter } from "next/router"
 import { DELETE_BOARD } from "./queries"
 import { useMutation } from "@apollo/client"
-
-import { useMoveToPage } from "../hooks/useMoveToPage"
 import {
   IMutation,
   IMutationDeleteBoardArgs,
 } from "../../../commons/types/generated/types"
+import { MouseEvent, useState } from "react"
 
 const BasicMenuButton = styled(Button)`
   color: darkred;
@@ -19,8 +17,7 @@ const BasicMenuButton = styled(Button)`
 
 export default function BasicMenu(props) {
   const router = useRouter()
-  const { moveToPage } = useMoveToPage()
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 
   const [deleteBoard] = useMutation<
     Pick<IMutation, "deleteBoard">,
@@ -28,7 +25,7 @@ export default function BasicMenu(props) {
   >(DELETE_BOARD)
 
   const open = Boolean(anchorEl)
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget)
   }
   const handleClose = () => {
@@ -36,7 +33,6 @@ export default function BasicMenu(props) {
   }
 
   const onClickMoveToEdit = () => {
-    // moveToPage(`/${props.visitedPage}`)
     router.push(`/${props.location}/${router.query.id}/edit`)
   }
 
